@@ -5,6 +5,11 @@ RUN apt-get update && apt-get install -y \
     libmaxminddb-dev pkg-config libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git unzip curl libicu-dev libgmp-dev libpng-dev libjpeg-dev libfreetype6-dev \
+    libmaxminddb-dev pkg-config libssl-dev libffi-dev zlib1g-dev libzip-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Instala extensões necessárias
 RUN docker-php-ext-install intl gmp gd ffi \
     && pecl install redis \
