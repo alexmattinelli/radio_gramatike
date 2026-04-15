@@ -25,12 +25,17 @@ WORKDIR /var/azuracast
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer install --no-dev --no-interaction --optimize-autoloader
 
+# Copia os arquivos do AzuraCast para o diretório servido pelo Apache
+RUN cp -r /var/azuracast/www/* /var/www/html/
+
 WORKDIR /var/azuracast/www
 
+# Variáveis de ambiente
 ENV AZURACAST_DB_TYPE=pgsql \
     DISABLE_MARIADB=true \
     DISABLE_REDIS=true
 
 EXPOSE 80
 
-CMD ["php", "-S", "0.0.0.0:80", "-t", "."]
+# Usa o Apache como servidor web
+CMD ["apache2-foreground"]
