@@ -6,4 +6,4 @@ ENV DISABLE_MARIADB=true \
 
 EXPOSE 80
 
-ENTRYPOINT ["/var/azuracast/www/docker/web.sh"]
+CMD ["/var/azuracast/www/docker/web.sh"]
