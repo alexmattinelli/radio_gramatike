@@ -30,6 +30,11 @@ RUN a2enmod rewrite \
     </Directory>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
+# Corrige diretório temporário
+RUN mkdir -p /var/www_tmp \
+    && chown -R www-data:www-data /var/www_tmp \
+    && chmod -R 775 /var/www_tmp
+
 WORKDIR /var/azuracast/web
 
 ENV AZURACAST_DB_TYPE=pgsql \
