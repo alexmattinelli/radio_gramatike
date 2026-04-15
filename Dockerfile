@@ -39,7 +39,7 @@ WORKDIR /var/azuracast/web
 
 ENV AZURACAST_DB_TYPE=pgsql \
     DISABLE_MARIADB=true \
-    DISABLE_REDIS=true
+    DISABLE_REDIS=true \
     AZURACAST_TEMP_DIR=/var/azuracast/tmp
 
 EXPOSE 80
