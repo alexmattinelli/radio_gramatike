@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install intl gmp gd \
     && pecl install redis \
     && pecl install maxminddb \
-    && docker-php-ext-enable redis maxminddb
+    && docker-php-ext-enable redis maxminddb ffi
+
 
 # Clona o AzuraCast
 RUN git clone --branch stable https://github.com/AzuraCast/AzuraCast.git /var/azuracast
