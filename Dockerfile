@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install intl gmp gd \
     && pecl install redis \
     && pecl install maxminddb \
-    && docker-php-ext-enable redis maxminddb ffi
+    && docker-php-ext-enable redis maxminddb
 
 
 # Clona o AzuraCast
