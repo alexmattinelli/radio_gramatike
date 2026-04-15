@@ -6,10 +6,12 @@ RUN apt-get update && apt-get install -y \
 
 RUN git clone --branch stable https://github.com/AzuraCast/AzuraCast.git /var/azuracast
 
-WORKDIR /var/azuracast/www
+WORKDIR /var/azuracast
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer install --no-dev --no-interaction --optimize-autoloader
+
+WORKDIR /var/azuracast/www
 
 ENV AZURACAST_DB_TYPE=pgsql \
     DISABLE_MARIADB=true \
@@ -17,10 +19,7 @@ ENV AZURACAST_DB_TYPE=pgsql \
 
 EXPOSE 80
 
-# Mantém o servidor PHP embutido rodando na porta 80
 CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
-
-EXPOSE 80
 
 CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
 
