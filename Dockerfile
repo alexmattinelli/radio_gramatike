@@ -6,11 +6,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Instala extensões necessárias
-RUN docker-php-ext-install intl gmp gd \
+RUN docker-php-ext-install intl gmp gd ffi \
     && pecl install redis \
     && pecl install maxminddb \
-    && docker-php-ext-enable redis maxminddb
-
+    && docker-php-ext-enable redis maxminddb ffi
 
 # Clona o AzuraCast
 RUN git clone --branch stable https://github.com/AzuraCast/AzuraCast.git /var/azuracast
@@ -28,7 +27,5 @@ ENV AZURACAST_DB_TYPE=pgsql \
     DISABLE_REDIS=true
 
 EXPOSE 80
-
-CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
 
 CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
