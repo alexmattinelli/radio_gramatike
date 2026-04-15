@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.4-apache
 
 RUN apt-get update && apt-get install -y \
     git unzip curl \
@@ -20,6 +20,3 @@ ENV AZURACAST_DB_TYPE=pgsql \
 EXPOSE 80
 
 CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
-
-CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
-
