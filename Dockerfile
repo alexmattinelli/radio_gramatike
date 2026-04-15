@@ -30,16 +30,17 @@ RUN a2enmod rewrite \
     </Directory>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
-# Corrige diretório temporário
-RUN mkdir -p /var/www_tmp \
-    && chown -R www-data:www-data /var/www_tmp \
-    && chmod -R 775 /var/www_tmp
+# Corrige diretório temporário dentro do projeto
+RUN mkdir -p /var/azuracast/tmp \
+    && chown -R www-data:www-data /var/azuracast/tmp \
+    && chmod -R 775 /var/azuracast/tmp
 
 WORKDIR /var/azuracast/web
 
 ENV AZURACAST_DB_TYPE=pgsql \
     DISABLE_MARIADB=true \
     DISABLE_REDIS=true
+    AZURACAST_TEMP_DIR=/var/azuracast/tmp
 
 EXPOSE 80
 
