@@ -10,15 +10,17 @@ RUN docker-php-ext-install intl gmp gd ffi \
     && pecl install maxminddb \
     && docker-php-ext-enable redis maxminddb ffi
 
+# Clona o AzuraCast
 RUN git clone --branch stable https://github.com/AzuraCast/AzuraCast.git /var/azuracast
 
 WORKDIR /var/azuracast
 
+# Instala Composer e dependências
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer install --no-dev --no-interaction --optimize-autoloader
 
-# Copia os arquivos da pasta correta (web)
-RUN cp -r /var/azuracast/web/* /var/www/html/
+# Define o diretório web como raiz do Apache
+WORKDIR /var/azuracast/web
 
 ENV AZURACAST_DB_TYPE=pgsql \
     DISABLE_MARIADB=true \
