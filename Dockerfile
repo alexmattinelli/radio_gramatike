@@ -33,4 +33,5 @@ ENV AZURACAST_DB_TYPE=pgsql \
 
 EXPOSE 80
 
-CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
+CMD ["php", "-S", "0.0.0.0:80", "-t", "/var/azuracast/www/public"]
+
