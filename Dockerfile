@@ -19,8 +19,9 @@ WORKDIR /var/azuracast
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer install --no-dev --no-interaction --optimize-autoloader
 
-# Configura o Apache para servir /var/azuracast/web
-RUN echo '<VirtualHost *:80>\n\
+# Configura Apache para servir AzuraCast
+RUN a2enmod rewrite \
+    && echo '<VirtualHost *:80>\n\
     DocumentRoot /var/azuracast/web\n\
     <Directory /var/azuracast/web>\n\
         Options Indexes FollowSymLinks\n\
@@ -28,6 +29,8 @@ RUN echo '<VirtualHost *:80>\n\
         Require all granted\n\
     </Directory>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+
+WORKDIR /var/azuracast/web
 
 ENV AZURACAST_DB_TYPE=pgsql \
     DISABLE_MARIADB=true \
