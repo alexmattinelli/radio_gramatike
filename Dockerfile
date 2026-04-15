@@ -35,6 +35,9 @@ RUN mkdir -p /var/www_tmp /var/azuracast/tmp /var/azuracast/data /var/azuracast/
     && chown -R www-data:www-data /var/www_tmp /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations \
     && chmod -R 775 /var/www_tmp /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations
 
+RUN php ./bin/console doctrine:migrations:migrate --no-interaction || true
+RUN php ./bin/console azuracast:setup || true
+
 WORKDIR /var/azuracast/web
 
 ENV AZURACAST_DB_TYPE=pgsql \
