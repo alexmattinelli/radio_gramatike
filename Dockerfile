@@ -30,10 +30,10 @@ RUN a2enmod rewrite \
     </Directory>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
-# Corrige diretório temporário dentro do projeto
-RUN mkdir -p /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations \
-    && chown -R www-data:www-data /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations \
-    && chmod -R 775 /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations
+# Corrige diretórios temporários e persistentes
+RUN mkdir -p /var/www_tmp /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations \
+    && chown -R www-data:www-data /var/www_tmp /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations \
+    && chmod -R 775 /var/www_tmp /var/azuracast/tmp /var/azuracast/data /var/azuracast/stations
 
 WORKDIR /var/azuracast/web
 
